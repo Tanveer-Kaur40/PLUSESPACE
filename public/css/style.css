@@ -11,6 +11,18 @@
     --blue-hover: #1d4ed8;
 }
 
+[data-theme="light"] {
+    color-scheme: light;
+    --bg: #f4f7fb;
+    --panel: #ffffff;
+    --panel-hover: #eef3fb;
+    --border: #d8e1ef;
+    --text: #17233b;
+    --muted: #64748b;
+    --blue: #2563eb;
+    --blue-hover: #1d4ed8;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -354,6 +366,12 @@
     padding: 30px 20px;
 }
 
+.auth-theme-toggle {
+    position: fixed;
+    top: 22px;
+    right: 22px;
+}
+
 .auth-brand {
     margin-bottom: 28px;
 }
@@ -548,6 +566,90 @@ body {
     font-family: Inter, "Segoe UI", Arial, sans-serif;
     font-size: 14px;
     line-height: 1.5;
+    transition: background-color 180ms ease, color 180ms ease;
+}
+
+button,
+input,
+textarea,
+select {
+    color-scheme: inherit;
+}
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 35px;
+    padding: 7px 11px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--panel);
+    color: var(--text);
+    cursor: pointer;
+    font: inherit;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.theme-toggle:hover {
+    background: var(--panel-hover);
+}
+
+[data-theme="light"] .public-page,
+[data-theme="light"] .auth-page {
+    background:
+        radial-gradient(circle at 78% 12%, rgba(37, 99, 235, 0.12), transparent 27rem),
+        var(--bg);
+}
+
+[data-theme="light"] .topbar,
+[data-theme="light"] .sidebar,
+[data-theme="light"] .panel,
+[data-theme="light"] .auth-card,
+[data-theme="light"] .feature-card {
+    box-shadow: 0 10px 30px rgba(45, 65, 95, 0.06);
+}
+
+[data-theme="light"] .topbar {
+    background: rgba(255, 255, 255, 0.92);
+}
+
+[data-theme="light"] .auth-card,
+[data-theme="light"] .button-secondary {
+    background: #ffffff;
+}
+
+[data-theme="light"] .hero-copy h1,
+[data-theme="light"] .feature-heading h2,
+[data-theme="light"] .feature-card h3 {
+    color: var(--text);
+}
+
+[data-theme="light"] .hero-description,
+[data-theme="light"] .text-link {
+    color: var(--muted);
+}
+
+[data-theme="light"] .auth-form input,
+[data-theme="light"] .composer-input textarea,
+[data-theme="light"] .feed-filter select,
+[data-theme="light"] .search-box input {
+    background: #f8fafc;
+    color: var(--text);
+}
+
+[data-theme="light"] .profile-cover {
+    background-image:
+        radial-gradient(circle at 80% 20%, rgba(109, 156, 255, 0.3), transparent 18rem),
+        linear-gradient(120deg, #b9d0ff, #cdd8f4 52%, #ddd0f4);
+}
+
+[data-theme="light"] .upgrade-card,
+[data-theme="light"] .resource-card,
+[data-theme="light"] .suggestion,
+[data-theme="light"] .mini-community {
+    background: #f8fafc;
 }
 
 a {

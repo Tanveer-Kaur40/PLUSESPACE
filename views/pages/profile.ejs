@@ -6,6 +6,7 @@
     <meta name="description" content="<%= currentUser.name %>'s PulseSpace profile">
     <title><%= currentUser.name %> · PulseSpace</title>
     <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/theme.js"></script>
     <script src="/js/profile.js" defer></script>
 </head>
 <body class="app-page">
@@ -18,6 +19,7 @@
                 <a class="top-link" href="/communities">Communities</a>
             </nav>
             <div class="top-actions">
+                <button class="theme-toggle" type="button" data-theme-toggle></button>
                 <a class="profile-button active" href="/profile"><%= currentUser.name %></a>
                 <a class="profile-button" href="/logout">Sign out</a>
             </div>
