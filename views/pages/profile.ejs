@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<%= currentUser.name %>'s PulseSpace profile">
+    <title><%= currentUser.name %> · PulseSpace</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/profile.js" defer></script>
+</head>
+<body class="app-page">
+    <div class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="/home"><span class="brand-mark">P</span><span>PulseSpace</span></a>
+            <nav class="top-navigation" aria-label="Main navigation">
+                <a class="top-link" href="/home">Home</a>
+                <a class="top-link" href="/explore">Explore</a>
+                <a class="top-link" href="/communities">Communities</a>
+            </nav>
+            <div class="top-actions">
+                <a class="profile-button active" href="/profile"><%= currentUser.name %></a>
+                <a class="profile-button" href="/logout">Sign out</a>
+            </div>
+        </header>
+
+        <main class="profile-page">
+            <section class="profile-hero panel">
+                <div class="profile-cover"<% if (currentUser.coverImage) { %> style="background-image: url('<%= currentUser.coverImage %>')"<% } %>></div>
+                <div class="profile-summary">
+                    <% if (currentUser.profileImage) { %>
+                        <img class="profile-avatar" src="<%= currentUser.profileImage %>" alt="<%= currentUser.name %>'s profile image">
+                    <% } else { %>
+                        <div class="profile-avatar user-avatar current-user"><%= currentUser.name.slice(0, 2).toUpperCase() %></div>
+                    <% } %>
+                    <div class="profile-heading">
+                        <p class="eyebrow">YOUR PROFILE</p>
+                        <h1><%= currentUser.name %></h1>
+                        <p class="profile-handle">@<%= currentUser.email.split("@")[0] %></p>
+                    </div>
+                    <button class="button button-secondary profile-edit" type="button" data-open-profile-editor>Edit profile</button>
+                </div>
+                <div class="profile-stats" aria-label="Profile statistics">
+                    <div><strong><%= posts.length %></strong><span>Posts</span></div>
+                    <div><strong><%= currentUser.followersCount || 0 %></strong><span>Followers</span></div>
+                    <div><strong><%= currentUser.followingCount || 0 %></strong><span>Following</span></div>
+                </div>
+            </section>
+
+            <section class="profile-editor panel" id="profile-editor" hidden>
+                <div class="section-heading">
+                    <div><p class="eyebrow">MAKE IT YOURS</p><h2>Customize your profile</h2></div>
+                    <button class="text-button" type="button" data-close-profile-editor>Close</button>
+                </div>
+                <div class="profile-editor-grid">
+                    <label class="profile-upload">
+                        <span>Profile image</span>
+                        <small>Choose from gallery or camera</small>
+                        <input type="file" accept="image/*" capture="user" data-profile-image>
+                    </label>
+                    <label class="profile-upload">
+                        <span>Profile backdrop</span>
+                        <small>Choose a cover image</small>
+                        <input type="file" accept="image/*" data-cover-image>
+                    </label>
+                </div>
+                <div class="profile-editor-actions">
+                    <span class="composer-hint" data-profile-status></span>
+                    <button class="primary-button" type="button" data-save-profile>Save changes</button>
+                </div>
+            </section>
+
+            <section class="profile-content">
+                <div class="profile-posts">
+                    <div class="feed-toolbar">
+                        <div><p class="eyebrow">YOUR VOICE</p><h2>Your posts</h2></div>
+                        <a class="button button-primary" href="/home#composer">Create post</a>
+                    </div>
+
+                    <% if (posts.length === 0) { %>
+                        <div class="empty-profile panel">
+                            <div class="empty-profile-icon">✦</div>
+                            <h2>Share your first idea</h2>
+                            <p>Your posts will appear here so your community can get to know you.</p>
+                            <a class="button button-primary" href="/home#composer">Write a post</a>
+                        </div>
+                    <% } %>
+
+                    <div class="posts-list">
+                        <% posts.forEach((post) => { %>
+                            <article class="post-card panel">
+                                <div class="post-header">
+                                    <div class="user-avatar current-user"><%= currentUser.name.slice(0, 2).toUpperCase() %></div>
+                                    <div class="post-author">
+                                        <h3><%= currentUser.name %></h3>
+                                        <p><%= new Date(post.createdAt).toLocaleString() %></p>
+                                    </div>
+                                </div>
+                                <% if (post.content) { %><div class="post-content"><p><%= post.content %></p></div><% } %>
+                                <% if (post.image) { %><img class="post-image profile-post-image" src="<%= post.image %>" alt="Image shared by <%= currentUser.name %>"><% } %>
+                                <div class="post-stats"><span>0 likes</span><span>0 comments</span><span>0 shares</span></div>
+                            </article>
+                        <% }) %>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="site-footer">PulseSpace · Connect through ideas.</footer>
+    </div>
+</body>
+</html>

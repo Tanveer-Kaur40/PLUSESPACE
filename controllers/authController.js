@@ -47,6 +47,14 @@ const login = (req, res) => {
     const password = req.body.password || "";
     const user = users.get(email);
 
+    if (password.length < 8) {
+        return res.status(400).render("pages/login", {
+            error: "Your password must be at least 8 characters long.",
+            message: null,
+            form: { email }
+        });
+    }
+
     if (!user || user.passwordHash !== hashPassword(password)) {
         return res.status(401).render("pages/login", {
             error: "That email or password is not correct.",
@@ -81,7 +89,11 @@ const signup = (req, res) => {
     const user = {
         name,
         email,
-        passwordHash: hashPassword(password)
+        passwordHash: hashPassword(password),
+        followersCount: 0,
+        followingCount: 0,
+        profileImage: null,
+        coverImage: null
     };
     users.set(email, user);
     setSessionCookie(res, createSession(user));
@@ -108,11 +120,33 @@ const logout = (req, res) => {
 
 const getUserForSession = (sessionId) => sessions.get(sessionId) || null;
 
+const updateProfile = (req, res) => {
+    const { profileImage, coverImage } = req.body;
+    const user = res.locals.currentUser;
+
+    for (const image of [profileImage, coverImage]) {
+        if (image !== null && image !== undefined && !image.startsWith("data:image/")) {
+            return res.status(400).json({ error: "Please choose a valid image." });
+        }
+    }
+
+    if (profileImage !== undefined) {
+        user.profileImage = profileImage;
+    }
+
+    if (coverImage !== undefined) {
+        user.coverImage = coverImage;
+    }
+
+    return res.json({ user });
+};
+
 module.exports = {
     getUserForSession,
     login,
     logout,
     showLogin,
     showSignup,
-    signup
+    signup,
+    updateProfile
 };

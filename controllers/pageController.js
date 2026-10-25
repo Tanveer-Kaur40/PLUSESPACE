@@ -1,3 +1,5 @@
+const { getPostsForUser } = require("./postController");
+
 const renderAboutPage = (req, res) => {
     if (res.locals.currentUser) {
         return res.redirect("/home");
@@ -12,7 +14,17 @@ const renderHomePage = (req, res) => {
     });
 };
 
+const renderProfilePage = (req, res) => {
+    const user = res.locals.currentUser;
+
+    return res.render("pages/profile", {
+        currentUser: user,
+        posts: getPostsForUser(user.email)
+    });
+};
+
 module.exports = {
     renderAboutPage,
-    renderHomePage
+    renderHomePage,
+    renderProfilePage
 };

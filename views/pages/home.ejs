@@ -12,13 +12,13 @@
 <body>
     <div class="app-shell">
         <header class="topbar">
-            <a class="brand" href="/">
+            <a class="brand" href="/home">
                 <span class="brand-mark">P</span>
                 <span>PulseSpace</span>
             </a>
 
             <nav class="top-navigation" aria-label="Main navigation">
-                <a class="top-link active" href="/">Home</a>
+                <a class="top-link active" href="/home">Home</a>
                 <a class="top-link" href="/explore">Explore</a>
                 <a class="top-link" href="/communities">Communities</a>
             </nav>
@@ -38,7 +38,7 @@
             <aside class="sidebar panel">
                 <div class="sidebar-section">
                     <p class="section-label">Workspace</p>
-                    <a class="side-link selected" href="/">Feed</a>
+                    <a class="side-link selected" href="/home">Feed</a>
                     <a class="side-link" href="/explore">Explore</a>
                     <a class="side-link" href="/communities">Communities</a>
                     <a class="side-link" href="/bookmarks">Bookmarks</a>
@@ -90,7 +90,11 @@
 
                 <section class="composer panel" id="composer">
                     <!-- <div class="composer-top">
-                        <div class="user-avatar current-user">TK</div>
+                        <% if (currentUser.profileImage) { %>
+                            <img class="user-avatar current-user avatar-image" data-current-avatar-image src="<%= currentUser.profileImage %>" alt="<%= currentUser.name %>'s profile image">
+                        <% } else { %>
+                            <div class="user-avatar current-user" data-current-avatar><%= currentUser.name.slice(0, 2).toUpperCase() %></div>
+                        <% } %>
                         <label class="composer-input">
                             <span class="sr-only">Write a post</span>
                             <input id="post-input" type="text" placeholder="What's on your mind?">
@@ -98,7 +102,11 @@
                     </div> -->
 
                     <div class="composer-top">
-    <div class="user-avatar current-user">TK</div>
+    <% if (currentUser.profileImage) { %>
+        <img class="user-avatar current-user avatar-image" data-current-avatar-image src="<%= currentUser.profileImage %>" alt="<%= currentUser.name %>'s profile image">
+    <% } else { %>
+        <div class="user-avatar current-user" data-current-avatar><%= currentUser.name.slice(0, 2).toUpperCase() %></div>
+    <% } %>
     <div class="composer-fields">
         <label class="composer-input">
             <span class="sr-only">Write a post</span>
@@ -131,10 +139,6 @@
         Publish
     </button>
 </div>
-                    <div class="composer-footer">
-                        <span class="composer-hint">Share an update with your network</span>
-                        <button class="primary-button" type="button" id="publish-post">Publish</button>
-                    </div>
                 </section>
 
                 <div class="feed-toolbar">

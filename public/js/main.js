@@ -245,7 +245,22 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    publishButton.addEventListener("click", () => {
+    function readImageAsDataUrl(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.addEventListener("load", () => resolve(reader.result));
+            reader.addEventListener("error", () => reject(new Error("Unable to read image.")));
+            reader.readAsDataURL(file);
+        });
+    }
+
+    const avatarElement = document.querySelector("[data-current-avatar-image]");
+    const avatarInitials = document.querySelector("[data-current-avatar]")?.textContent.trim() || "ME";
+    const avatarMarkup = avatarElement
+        ? `<img class="user-avatar current-user avatar-image" src="${avatarElement.src}" alt="Your profile image">`
+        : `<div class="user-avatar current-user" data-current-avatar>${avatarInitials}</div>`;
+
+    publishButton.addEventListener("click", async () => {
         const content = postInput.value.trim();
         const imageFile = imageInput.files[0];
 
@@ -255,13 +270,36 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        publishButton.disabled = true;
+
+        let imageData = null;
+        try {
+            imageData = imageFile ? await readImageAsDataUrl(imageFile) : null;
+            const response = await fetch("/api/posts", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ content, image: imageData })
+            });
+
+            const result = await response.json();
+            if (!response.ok) {
+                showMessage(result.error || "Your post could not be published.");
+                return;
+            }
+        } catch (error) {
+            showMessage("Your post could not be published. Please try again.");
+            return;
+        } finally {
+            publishButton.disabled = false;
+        }
+
         const post = document.createElement("article");
         post.className = "post-card panel";
         post.dataset.category = "community";
 
         post.innerHTML = `
             <div class="post-header">
-                <div class="user-avatar current-user">TK</div>
+                ${avatarMarkup}
                 <div class="post-author">
                     <h3>Your Profile</h3>
                     <p>Just now</p>
@@ -288,14 +326,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         post.querySelector(".post-content").textContent = content;
 
-        if (imageFile && selectedImageUrl) {
+        if (imageData) {
             const postImageContainer = post.querySelector(".post-image-container");
             const postImage = post.querySelector(".post-image");
 
-            postImage.src = selectedImageUrl;
+            postImage.src = imageData;
             postImageContainer.hidden = false;
-
-            selectedImageUrl = null;
         }
 
         postsList.prepend(post);
@@ -361,4 +397,3 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
-
