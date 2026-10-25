@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in · PulseSpace</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="auth-page">
+    <main class="auth-shell">
+        <a class="brand auth-brand" href="/"><span class="brand-mark">P</span><span>PulseSpace</span></a>
+        <section class="auth-card">
+            <p class="eyebrow">WELCOME BACK</p>
+            <h1>Sign in to your space.</h1>
+            <p class="auth-subtitle">Pick up where you left off and see what your community is talking about.</p>
+            <% if (message) { %><p class="form-message"><%= message %></p><% } %>
+            <% if (error) { %><p class="form-error" role="alert"><%= error %></p><% } %>
+            <form method="post" action="/login" class="auth-form">
+                <label for="email">Email address</label>
+                <input id="email" name="email" type="email" value="<%= form?.email || '' %>" autocomplete="email" required>
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required>
+                <button class="button button-primary button-large" type="submit">Sign in <span aria-hidden="true">→</span></button>
+            </form>
+            <p class="auth-switch">New to PulseSpace? <a href="/signup">Create an account</a></p>
+        </section>
+        <a class="back-link" href="/">← Back to about PulseSpace</a>
+    </main>
+</body>
+</html>

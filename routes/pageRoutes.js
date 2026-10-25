@@ -1,9 +1,11 @@
 
 const express = require("express");
-const { renderHomePage } = require("../controllers/pageController");
+const { renderAboutPage, renderHomePage } = require("../controllers/pageController");
+const { requireAuth } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-router.get("/", renderHomePage);
+router.get("/", renderAboutPage);
+router.get("/home", requireAuth, renderHomePage);
 
 module.exports = router;

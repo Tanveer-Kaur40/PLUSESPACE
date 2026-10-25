@@ -29,7 +29,8 @@
                     <input type="search" placeholder="Search PulseSpace">
                 </label>
                 <button class="icon-button" type="button" aria-label="Notifications">Notifications</button>
-                <button class="profile-button" type="button">My Profile</button>
+                <a class="profile-button" href="/profile"><%= currentUser.name %></a>
+                <a class="profile-button" href="/logout">Sign out</a>
             </div>
         </header>
 
@@ -42,6 +43,7 @@
                     <a class="side-link" href="/communities">Communities</a>
                     <a class="side-link" href="/bookmarks">Bookmarks</a>
                     <a class="side-link" href="/profile">My Profile</a>
+                    <a class="side-link" href="/logout">Sign out</a>
                     <a class="side-link" href="/settings">Settings</a>
                 </div>
 

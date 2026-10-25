@@ -4,6 +4,8 @@ const path = require("path");
 require("dotenv").config();
 
 const pageRoutes = require("./routes/pageRoutes");
+const authRoutes = require("./routes/authRoutes");
+const { attachCurrentUser } = require("./middleware/authMiddleware");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -11,11 +13,13 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(attachCurrentUser);
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use("/", pageRoutes);
+app.use("/", authRoutes);
 
 app.listen(PORT, () => {
     console.log(`PulseSpace server running at http://localhost:${PORT}`);
