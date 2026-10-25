@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PulseSpace brings social networking, technology trends and news together.">
+    <title>PulseSpace | Social Network</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/main.js" defer></script>
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="/">
+                <span class="brand-mark">P</span>
+                <span>PulseSpace</span>
+            </a>
+
+            <nav class="top-navigation" aria-label="Main navigation">
+                <a class="top-link active" href="/">Home</a>
+                <a class="top-link" href="/explore">Explore</a>
+                <a class="top-link" href="/communities">Communities</a>
+            </nav>
+
+            <div class="top-actions">
+                <label class="search-box">
+                    <span class="sr-only">Search PulseSpace</span>
+                    <input type="search" placeholder="Search PulseSpace">
+                </label>
+                <button class="icon-button" type="button" aria-label="Notifications">Notifications</button>
+                <button class="profile-button" type="button">My Profile</button>
+            </div>
+        </header>
+
+        <div class="dashboard">
+            <aside class="sidebar panel">
+                <div class="sidebar-section">
+                    <p class="section-label">Workspace</p>
+                    <a class="side-link selected" href="/">Feed</a>
+                    <a class="side-link" href="/explore">Explore</a>
+                    <a class="side-link" href="/communities">Communities</a>
+                    <a class="side-link" href="/bookmarks">Bookmarks</a>
+                    <a class="side-link" href="/profile">My Profile</a>
+                    <a class="side-link" href="/settings">Settings</a>
+                </div>
+
+                <button class="primary-button create-button" type="button" data-open-composer>
+                    Create Post
+                </button>
+
+                <div class="sidebar-section shortcuts">
+                    <p class="section-label">Your communities</p>
+                    <a class="community-link" href="/communities">Photography World</a>
+                    <a class="community-link" href="/communities">Blockchain Builders</a>
+                    <a class="community-link" href="/communities">AI Revolution</a>
+                    <a class="community-link" href="/communities">Travel Diaries</a>
+                </div>
+
+                <div class="upgrade-card">
+                    <p class="upgrade-title">Your ideas deserve an audience.</p>
+                    <p>Share knowledge, discover new perspectives and build your network.</p>
+                </div>
+            </aside>
+
+            <main class="main-feed">
+                <section class="stories-section panel">
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">YOUR NETWORK</p>
+                            <h2>Stories</h2>
+                        </div>
+                        <button class="text-button" type="button" data-view-stories>View all</button>
+                    </div>
+
+                    <div class="stories-list">
+                        <button class="story-item add-story" type="button" data-open-composer>
+                            <span class="story-avatar add-avatar">+</span>
+                            <span>Your story</span>
+                        </button>
+                        <button class="story-item" type="button"><span class="story-avatar avatar-blue">SL</span><span>Sophia Lee</span></button>
+                        <button class="story-item" type="button"><span class="story-avatar avatar-purple">JC</span><span>James Carter</span></button>
+                        <button class="story-item" type="button"><span class="story-avatar avatar-orange">OB</span><span>Olivia Bennett</span></button>
+                        <button class="story-item" type="button"><span class="story-avatar avatar-green">DK</span><span>Daniel Kim</span></button>
+                        <button class="story-item" type="button"><span class="story-avatar avatar-pink">MR</span><span>Mia Rodriguez</span></button>
+                    </div>
+                </section>
+
+                <section class="composer panel" id="composer">
+                    <!-- <div class="composer-top">
+                        <div class="user-avatar current-user">TK</div>
+                        <label class="composer-input">
+                            <span class="sr-only">Write a post</span>
+                            <input id="post-input" type="text" placeholder="What's on your mind?">
+                        </label>
+                    </div> -->
+
+                    <div class="composer-top">
+    <div class="user-avatar current-user">TK</div>
+    <div class="composer-fields">
+        <label class="composer-input">
+            <span class="sr-only">Write a post</span>
+            <textarea
+                id="post-input"
+                placeholder="What's on your mind?"
+                rows="2"
+                maxlength="2000"
+            ></textarea>
+        </label>
+
+        <div id="image-preview" class="image-preview" hidden>
+            <img id="selected-image" alt="Selected post preview">
+            <button id="remove-image" type="button">Remove image</button>
+        </div>
+    </div>
+</div>
+
+<input
+    id="image-input"
+    type="file"
+    accept="image/png,image/jpeg,image/webp,image/gif"
+    hidden
+>
+
+<div class="composer-footer">
+    <label for="image-input" class="composer-tool">Add image</label>
+    <span class="composer-hint">Share an update with your network</span>
+    <button class="primary-button" type="button" id="publish-post">
+        Publish
+    </button>
+</div>
+                    <div class="composer-footer">
+                        <span class="composer-hint">Share an update with your network</span>
+                        <button class="primary-button" type="button" id="publish-post">Publish</button>
+                    </div>
+                </section>
+
+                <div class="feed-toolbar">
+                    <div>
+                        <p class="eyebrow">THE LATEST</p>
+                        <h2>Your feed</h2>
+                    </div>
+                    <label class="feed-filter">
+                        <span class="sr-only">Filter feed</span>
+                        <select id="feed-filter">
+                            <option value="all">All posts</option>
+                            <option value="technology">Technology</option>
+                            <option value="community">Community</option>
+                        </select>
+                    </label>
+                </div>
+
+                <section class="posts-list" id="posts-list">
+                    <article class="post-card panel" data-category="technology">
+                        <div class="post-header">
+                            <div class="user-avatar avatar-blue">SL</div>
+                            <div class="post-author">
+                                <h3>Sophia Lee <span class="verified">Verified</span></h3>
+                                <p>Product designer · 24 minutes ago</p>
+                            </div>
+                            <button class="more-button" type="button" aria-label="More post options">More</button>
+                        </div>
+                        <div class="post-content">
+                            <p>Spent the week exploring how thoughtful design can make complex technology feel simple. The best interfaces don't compete for attention; they help people focus on what matters.</p>
+                            <a class="topic-tag" href="/explore">#ProductDesign</a>
+                            <a class="topic-tag" href="/explore">#Technology</a>
+                        </div>
+                        <div class="post-visual design-visual">
+                            <span class="visual-label">DESIGN AND TECHNOLOGY</span>
+                            <h3>Building digital experiences that feel effortless.</h3>
+                            <p>Ideas become meaningful when design meets purpose.</p>
+                        </div>
+                        <div class="post-stats"><span data-like-count>128 likes</span><span>24 comments</span><span>12 shares</span></div>
+                        <div class="post-actions">
+                            <button type="button" class="post-action" data-like>Like</button>
+                            <button type="button" class="post-action" data-comment>Comment</button>
+                            <button type="button" class="post-action" data-share>Share</button>
+                            <button type="button" class="post-action save-action" data-save>Save</button>
+                        </div>
+                    </article>
+
+                    <article class="post-card panel" data-category="community">
+                        <div class="post-header">
+                            <div class="user-avatar avatar-purple">JC</div>
+                            <div class="post-author">
+                                <h3>James Carter <span class="verified">Verified</span></h3>
+                                <p>Software developer · 1 hour ago</p>
+                            </div>
+                            <button class="more-button" type="button" aria-label="More post options">More</button>
+                        </div>
+                        <div class="post-content">
+                            <p>Our developer community is discussing the skills that matter most when building real-world applications. My pick: understanding the fundamentals, writing maintainable code, and learning to debug systematically.</p>
+                            <a class="topic-tag" href="/communities">#Developers</a>
+                            <a class="topic-tag" href="/communities">#CareerGrowth</a>
+                        </div>
+                        <div class="resource-card">
+                            <div class="resource-mark">P</div>
+                            <div>
+                                <h4>Developer Community</h4>
+                                <p>Share projects, discuss ideas and learn together.</p>
+                                <span>PulseSpace Communities</span>
+                            </div>
+                        </div>
+                        <div class="post-stats"><span data-like-count>84 likes</span><span>16 comments</span><span>9 shares</span></div>
+                        <div class="post-actions">
+                            <button type="button" class="post-action" data-like>Like</button>
+                            <button type="button" class="post-action" data-comment>Comment</button>
+                            <button type="button" class="post-action" data-share>Share</button>
+                            <button type="button" class="post-action save-action" data-save>Save</button>
+                        </div>
+                    </article>
+                </section>
+            </main>
+
+            <aside class="right-column">
+                <section class="panel right-panel">
+                    <div class="section-heading">
+                        <div><p class="eyebrow">WHAT'S HAPPENING</p><h2>Trending now</h2></div>
+                        <a class="text-button" href="/explore">Explore</a>
+                    </div>
+                    <a class="trend-item" href="/explore"><span class="trend-rank">01</span><span><strong>#ArtificialIntelligence</strong><small>12.8K discussions</small></span></a>
+                    <a class="trend-item" href="/explore"><span class="trend-rank">02</span><span><strong>#WebDevelopment</strong><small>8.4K discussions</small></span></a>
+                    <a class="trend-item" href="/explore"><span class="trend-rank">03</span><span><strong>#CareerGrowth</strong><small>6.2K discussions</small></span></a>
+                    <a class="trend-item" href="/explore"><span class="trend-rank">04</span><span><strong>#OpenSource</strong><small>4.7K discussions</small></span></a>
+                    <a class="trend-item" href="/explore"><span class="trend-rank">05</span><span><strong>#DigitalInnovation</strong><small>3.1K discussions</small></span></a>
+                </section>
+
+                <section class="panel right-panel">
+                    <div class="section-heading">
+                        <div><p class="eyebrow">FIND YOUR PEOPLE</p><h2>Communities</h2></div>
+                        <a class="text-button" href="/communities">View all</a>
+                    </div>
+                    <div class="mini-community"><span class="community-icon icon-blue">AI</span><span><strong>AI Revolution</strong><small>8.2K members</small></span><button type="button" class="follow-button" data-join>Join</button></div>
+                    <div class="mini-community"><span class="community-icon icon-purple">DE</span><span><strong>Developer Exchange</strong><small>5.6K members</small></span><button type="button" class="follow-button" data-join>Join</button></div>
+                    <div class="mini-community"><span class="community-icon icon-green">DS</span><span><strong>Design Studio</strong><small>3.4K members</small></span><button type="button" class="follow-button" data-join>Join</button></div>
+                </section>
+
+                <section class="panel right-panel suggestions-panel">
+                    <div class="section-heading">
+                        <div><p class="eyebrow">EXPAND YOUR NETWORK</p><h2>People to follow</h2></div>
+                    </div>
+                    <div class="suggestion"><span class="user-avatar avatar-orange">MR</span><span><strong>Mia Rodriguez</strong><small>UX Researcher</small></span><button type="button" class="follow-button" data-follow>Follow</button></div>
+                    <div class="suggestion"><span class="user-avatar avatar-green">DK</span><span><strong>Daniel Kim</strong><small>Software Engineer</small></span><button type="button" class="follow-button" data-follow>Follow</button></div>
+                    <div class="suggestion"><span class="user-avatar avatar-pink">NS</span><span><strong>Noah Smith</strong><small>Tech Writer</small></span><button type="button" class="follow-button" data-follow>Follow</button></div>
+                </section>
+            </aside>
+        </div>
+        <footer class="site-footer">PulseSpace · Connect through ideas.</footer>
+    </div>
+</body>
+</html>
