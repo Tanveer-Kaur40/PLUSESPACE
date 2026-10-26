@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmarks | PulseSpace</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js" defer></script>
+    <script src="/js/bookmarks.js" defer></script>
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="/home"><span class="brand-mark">P</span><span>PulseSpace</span></a>
+            <div class="top-actions">
+                <button class="theme-toggle" type="button" data-theme-toggle></button>
+                <label class="search-box"><span class="sr-only">Search PulseSpace</span><input type="search" placeholder="Search PulseSpace"></label>
+                <a class="profile-button" href="/profile"><%= currentUser.name %></a>
+                <a class="profile-button" href="/logout">Sign out</a>
+            </div>
+        </header>
+        <div class="dashboard page-dashboard">
+            <aside class="sidebar panel">
+                <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-label="Collapse sidebar" aria-expanded="true">‹</button>
+                <div class="sidebar-section">
+                    <p class="section-label">YOUR SPACE</p>
+                    <a class="side-link" href="/home">Feed</a>
+                    <a class="side-link" href="/explore">Explore</a>
+                    <a class="side-link" href="/communities">Communities</a>
+                    <a class="side-link" href="/messages">Messages</a>
+                    <a class="side-link selected" href="/bookmarks">Bookmarks</a>
+                    <a class="side-link" href="/profile">My Profile</a>
+                    <a class="side-link" href="/settings">Settings</a>
+                </div>
+            </aside>
+            <main class="content-page">
+                <div class="page-heading"><p class="eyebrow">YOUR COLLECTION</p><h1>Bookmarks</h1><p>Posts you save from your feed appear here.</p></div>
+                <section id="bookmarks-list" class="posts-list"></section>
+                <div id="empty-bookmarks" class="panel empty-page" hidden><h2>No bookmarks yet</h2><p>Save a post from your feed and it will stay here for later.</p><a class="primary-button" href="/home">Explore your feed</a></div>
+            </main>
+        </div>
+        <footer class="site-footer">PulseSpace · Connect through ideas.</footer>
+    </div>
+</body>
+</html>

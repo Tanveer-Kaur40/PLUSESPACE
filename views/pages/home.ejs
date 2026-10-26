@@ -8,6 +8,7 @@
     <title>PulseSpace | Social Network</title>
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js" defer></script>
     <script src="/js/main.js" defer></script>
 </head>
 <body>
@@ -17,12 +18,6 @@
                 <span class="brand-mark">P</span>
                 <span>PulseSpace</span>
             </a>
-
-            <nav class="top-navigation" aria-label="Main navigation">
-                <a class="top-link active" href="/home">Home</a>
-                <a class="top-link" href="/explore">Explore</a>
-                <a class="top-link" href="/communities">Communities</a>
-            </nav>
 
             <div class="top-actions">
                 <button class="theme-toggle" type="button" data-theme-toggle></button>
@@ -38,14 +33,15 @@
 
         <div class="dashboard">
             <aside class="sidebar panel">
+                <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-label="Collapse sidebar" aria-expanded="true">‹</button>
                 <div class="sidebar-section">
-                    <p class="section-label">Workspace</p>
+                    <p class="section-label">YOUR SPACE</p>
                     <a class="side-link selected" href="/home">Feed</a>
                     <a class="side-link" href="/explore">Explore</a>
                     <a class="side-link" href="/communities">Communities</a>
+                    <a class="side-link" href="/messages">Messages</a>
                     <a class="side-link" href="/bookmarks">Bookmarks</a>
                     <a class="side-link" href="/profile">My Profile</a>
-                    <a class="side-link" href="/logout">Sign out</a>
                     <a class="side-link" href="/settings">Settings</a>
                 </div>
 
@@ -53,43 +49,16 @@
                     Create Post
                 </button>
 
-                <div class="sidebar-section shortcuts">
-                    <p class="section-label">Your communities</p>
-                    <a class="community-link" href="/communities">Photography World</a>
-                    <a class="community-link" href="/communities">Blockchain Builders</a>
-                    <a class="community-link" href="/communities">AI Revolution</a>
-                    <a class="community-link" href="/communities">Travel Diaries</a>
-                </div>
-
-                <div class="upgrade-card">
-                    <p class="upgrade-title">Your ideas deserve an audience.</p>
-                    <p>Share knowledge, discover new perspectives and build your network.</p>
+                <div class="sidebar-note">
+                    <span class="sidebar-note-mark">P</span>
+                    <div>
+                        <strong>Make your mark</strong>
+                        <p>Share ideas with your network.</p>
+                    </div>
                 </div>
             </aside>
 
             <main class="main-feed">
-                <section class="stories-section panel">
-                    <div class="section-heading">
-                        <div>
-                            <p class="eyebrow">YOUR NETWORK</p>
-                            <h2>Stories</h2>
-                        </div>
-                        <button class="text-button" type="button" data-view-stories>View all</button>
-                    </div>
-
-                    <div class="stories-list">
-                        <button class="story-item add-story" type="button" data-open-composer>
-                            <span class="story-avatar add-avatar">+</span>
-                            <span>Your story</span>
-                        </button>
-                        <button class="story-item" type="button"><span class="story-avatar avatar-blue">SL</span><span>Sophia Lee</span></button>
-                        <button class="story-item" type="button"><span class="story-avatar avatar-purple">JC</span><span>James Carter</span></button>
-                        <button class="story-item" type="button"><span class="story-avatar avatar-orange">OB</span><span>Olivia Bennett</span></button>
-                        <button class="story-item" type="button"><span class="story-avatar avatar-green">DK</span><span>Daniel Kim</span></button>
-                        <button class="story-item" type="button"><span class="story-avatar avatar-pink">MR</span><span>Mia Rodriguez</span></button>
-                    </div>
-                </section>
-
                 <section class="composer panel" id="composer">
                     <!-- <div class="composer-top">
                         <% if (currentUser.profileImage) { %>
@@ -159,7 +128,7 @@
                 </div>
 
                 <section class="posts-list" id="posts-list">
-                    <article class="post-card panel" data-category="technology">
+                    <article class="post-card panel" data-post-id="sophia-design" data-category="technology">
                         <div class="post-header">
                             <div class="user-avatar avatar-blue">SL</div>
                             <div class="post-author">
@@ -187,7 +156,7 @@
                         </div>
                     </article>
 
-                    <article class="post-card panel" data-category="community">
+                    <article class="post-card panel" data-post-id="james-developer" data-category="community">
                         <div class="post-header">
                             <div class="user-avatar avatar-purple">JC</div>
                             <div class="post-author">
@@ -243,14 +212,6 @@
                     <div class="mini-community"><span class="community-icon icon-green">DS</span><span><strong>Design Studio</strong><small>3.4K members</small></span><button type="button" class="follow-button" data-join>Join</button></div>
                 </section>
 
-                <section class="panel right-panel suggestions-panel">
-                    <div class="section-heading">
-                        <div><p class="eyebrow">EXPAND YOUR NETWORK</p><h2>People to follow</h2></div>
-                    </div>
-                    <div class="suggestion"><span class="user-avatar avatar-orange">MR</span><span><strong>Mia Rodriguez</strong><small>UX Researcher</small></span><button type="button" class="follow-button" data-follow>Follow</button></div>
-                    <div class="suggestion"><span class="user-avatar avatar-green">DK</span><span><strong>Daniel Kim</strong><small>Software Engineer</small></span><button type="button" class="follow-button" data-follow>Follow</button></div>
-                    <div class="suggestion"><span class="user-avatar avatar-pink">NS</span><span><strong>Noah Smith</strong><small>Tech Writer</small></span><button type="button" class="follow-button" data-follow>Follow</button></div>
-                </section>
             </aside>
         </div>
         <footer class="site-footer">PulseSpace · Connect through ideas.</footer>

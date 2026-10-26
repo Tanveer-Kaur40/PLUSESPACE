@@ -23,8 +23,29 @@ const renderProfilePage = (req, res) => {
     });
 };
 
+const renderBookmarksPage = (req, res) => {
+    res.render("pages/bookmarks", {
+        currentUser: res.locals.currentUser
+    });
+};
+
+const renderCommunitiesPage = (req, res) => {
+    res.render("pages/communities", {
+        currentUser: res.locals.currentUser
+    });
+};
+
+const renderMessagesPage = (req, res) => {
+    res.render("pages/messages", {
+        currentUser: res.locals.currentUser
+    });
+};
+
 module.exports = {
     renderAboutPage,
     renderHomePage,
-    renderProfilePage
+    renderProfilePage,
+    renderBookmarksPage,
+    renderCommunitiesPage,
+    renderMessagesPage
 };

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages | PulseSpace</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js" defer></script>
+    <script src="/js/messages.js" defer></script>
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="/home"><span class="brand-mark">P</span><span>PulseSpace</span></a>
+            <div class="top-actions">
+                <button class="theme-toggle" type="button" data-theme-toggle></button>
+                <label class="search-box"><span class="sr-only">Search PulseSpace</span><input type="search" placeholder="Search PulseSpace"></label>
+                <a class="profile-button" href="/profile"><%= currentUser.name %></a>
+                <a class="profile-button" href="/logout">Sign out</a>
+            </div>
+        </header>
+        <div class="dashboard page-dashboard messages-layout">
+            <aside class="sidebar panel">
+                <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-label="Collapse sidebar" aria-expanded="true">‹</button>
+                <div class="sidebar-section">
+                    <p class="section-label">YOUR SPACE</p>
+                    <a class="side-link" href="/home">Feed</a>
+                    <a class="side-link" href="/explore">Explore</a>
+                    <a class="side-link" href="/communities">Communities</a>
+                    <a class="side-link selected" href="/messages">Messages</a>
+                    <a class="side-link" href="/bookmarks">Bookmarks</a>
+                    <a class="side-link" href="/profile">My Profile</a>
+                    <a class="side-link" href="/settings">Settings</a>
+                </div>
+            </aside>
+            <main class="messages-page panel">
+                <section class="conversation-list">
+                    <div class="messages-heading"><div><p class="eyebrow">YOUR INBOX</p><h1>Messages</h1></div><button class="new-message-button" type="button" data-new-message>New</button></div>
+                    <label class="message-search"><span class="sr-only">Search messages</span><input type="search" placeholder="Search conversations"></label>
+                    <button class="conversation active" type="button" data-conversation="sophia"><span class="user-avatar avatar-blue">SL</span><span><strong>Sophia Lee</strong><small>Let’s share some design ideas.</small></span><time>9:42</time></button>
+                    <button class="conversation" type="button" data-conversation="james"><span class="user-avatar avatar-purple">JC</span><span><strong>James Carter</strong><small>The project looks great!</small></span><time>Yesterday</time></button>
+                    <button class="conversation" type="button" data-conversation="olivia"><span class="user-avatar avatar-orange">OB</span><span><strong>Olivia Bennett</strong><small>Thanks for connecting.</small></span><time>Mon</time></button>
+                </section>
+                <section class="conversation-view">
+                    <header class="conversation-header"><span class="user-avatar avatar-blue">SL</span><div><h2 id="conversation-name">Sophia Lee</h2><p>Product designer · Active now</p></div></header>
+                    <div class="message-thread" id="message-thread"><div class="message received">Hi! I liked your post about making technology feel simpler.</div><div class="message sent">Thank you, Sophia. I’m glad it resonated with you.</div><div class="message received">Let’s share some design ideas soon.</div></div>
+                    <form class="message-composer" id="message-form"><input id="message-input" type="text" placeholder="Write a message..." autocomplete="off"><button class="primary-button" type="submit">Send</button></form>
+                </section>
+            </main>
+        </div>
+        <footer class="site-footer">PulseSpace · Connect through ideas.</footer>
+    </div>
+</body>
+</html>

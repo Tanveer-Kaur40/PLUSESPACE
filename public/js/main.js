@@ -1,152 +1,3 @@
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     const postInput = document.getElementById("post-input");
-//     const publishButton = document.getElementById("publish-post");
-//     const postsList = document.getElementById("posts-list");
-//     const feedFilter = document.getElementById("feed-filter");
-//     const composer = document.getElementById("composer");
-
-//     function showMessage(message) {
-//         let notice = document.getElementById("app-notice");
-
-//         if (!notice) {
-//             notice = document.createElement("div");
-//             notice.id = "app-notice";
-//             notice.className = "app-notice";
-//             notice.setAttribute("role", "status");
-//             document.body.appendChild(notice);
-//         }
-
-//         notice.textContent = message;
-//         notice.classList.add("visible");
-
-//         clearTimeout(notice.timeoutId);
-//         notice.timeoutId = setTimeout(() => {
-//             notice.classList.remove("visible");
-//         }, 2500);
-//     }
-
-//     document.querySelectorAll("[data-open-composer]").forEach((button) => {
-//         button.addEventListener("click", () => {
-//             composer.scrollIntoView({ behavior: "smooth", block: "center" });
-//             postInput.focus();
-//         });
-//     });
-
-//     publishButton.addEventListener("click", () => {
-//         const content = postInput.value.trim();
-
-//         if (!content) {
-//             showMessage("Please write something before publishing.");
-//             postInput.focus();
-//             return;
-//         }
-
-//         const post = document.createElement("article");
-//         post.className = "post-card panel";
-//         post.dataset.category = "community";
-
-//         post.innerHTML = `
-//             <div class="post-header">
-//                 <div class="user-avatar current-user">TK</div>
-//                 <div class="post-author">
-//                     <h3>Your Profile</h3>
-//                     <p>Just now</p>
-//                 </div>
-//             </div>
-//             <div class="post-content"></div>
-//             <div class="post-stats">
-//                 <span data-like-count>0 likes</span>
-//                 <span>0 comments</span>
-//                 <span>0 shares</span>
-//             </div>
-//             <div class="post-actions">
-//                 <button type="button" class="post-action" data-like>Like</button>
-//                 <button type="button" class="post-action" data-comment>Comment</button>
-//                 <button type="button" class="post-action" data-share>Share</button>
-//                 <button type="button" class="post-action save-action" data-save>Save</button>
-//             </div>
-//         `;
-
-//         post.querySelector(".post-content").textContent = content;
-//         postsList.prepend(post);
-//         postInput.value = "";
-//         applyFeedFilter();
-//         showMessage("Your post has been published.");
-//     });
-
-//     function applyFeedFilter() {
-//         const selectedCategory = feedFilter.value;
-
-//         postsList.querySelectorAll(".post-card").forEach((post) => {
-//             const matches =
-//                 selectedCategory === "all" ||
-//                 post.dataset.category === selectedCategory;
-
-//             post.hidden = !matches;
-//         });
-//     }
-
-//     feedFilter.addEventListener("change", applyFeedFilter);
-
-//     document.addEventListener("click", async (event) => {
-//         const button = event.target.closest("button");
-
-//         if (!button) {
-//             return;
-//         }
-
-//         if (button.matches("[data-like]")) {
-//             const post = button.closest(".post-card");
-//             const count = post.querySelector("[data-like-count]");
-//             const wasLiked = button.classList.toggle("is-active");
-//             const currentCount = Number.parseInt(count.textContent, 10) || 0;
-
-//             count.textContent = `${currentCount + (wasLiked ? 1 : -1)} likes`;
-//             button.textContent = wasLiked ? "Liked" : "Like";
-//         }
-
-//         if (button.matches("[data-save]")) {
-//             const isSaved = button.classList.toggle("is-active");
-//             button.textContent = isSaved ? "Saved" : "Save";
-//             showMessage(isSaved ? "Post saved." : "Post removed from saved items.");
-//         }
-
-//         if (button.matches("[data-follow]")) {
-//             const isFollowing = button.classList.toggle("is-active");
-//             button.textContent = isFollowing ? "Following" : "Follow";
-//         }
-
-//         if (button.matches("[data-join]")) {
-//             const hasJoined = button.classList.toggle("is-active");
-//             button.textContent = hasJoined ? "Joined" : "Join";
-//         }
-
-//         if (button.matches("[data-comment]")) {
-//             showMessage("Comments will be available in the next feature update.");
-//         }
-
-//         if (button.matches("[data-share]")) {
-//             const post = button.closest(".post-card");
-//             const text = post.querySelector(".post-content").innerText;
-
-//             try {
-//                 await navigator.clipboard.writeText(text);
-//                 showMessage("Post text copied to clipboard.");
-//             } catch {
-//                 showMessage("Clipboard access is unavailable in this browser.");
-//             }
-//         }
-
-//         if (button.matches("[data-view-stories]")) {
-//             showMessage("You're viewing the latest stories.");
-//         }
-//     });
-// });
-
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
     const postInput = document.getElementById("post-input");
     const publishButton = document.getElementById("publish-post");
@@ -260,6 +111,46 @@ document.addEventListener("DOMContentLoaded", () => {
         ? `<img class="user-avatar current-user avatar-image" src="${avatarElement.src}" alt="Your profile image">`
         : `<div class="user-avatar current-user" data-current-avatar>${avatarInitials}</div>`;
 
+    function getSavedPosts() {
+        try {
+            return JSON.parse(localStorage.getItem("plusespace-bookmarks") || "[]");
+        } catch {
+            return [];
+        }
+    }
+
+    function savePosts(savedPosts) {
+        localStorage.setItem("plusespace-bookmarks", JSON.stringify(savedPosts));
+    }
+
+    function bookmarkPost(post, saved) {
+        const postId = post.dataset.postId;
+        const savedPosts = getSavedPosts().filter((item) => item.id !== postId);
+
+        if (saved) {
+            savedPosts.push({
+                id: postId,
+                markup: post.outerHTML
+            });
+        }
+
+        savePosts(savedPosts);
+    }
+
+    function restoreBookmarks() {
+        const savedIds = new Set(getSavedPosts().map((item) => item.id));
+
+        postsList.querySelectorAll("[data-post-id]").forEach((post) => {
+            const saveButton = post.querySelector("[data-save]");
+            const isSaved = savedIds.has(post.dataset.postId);
+
+            saveButton.classList.toggle("is-active", isSaved);
+            saveButton.textContent = isSaved ? "Saved" : "Save";
+        });
+    }
+
+    restoreBookmarks();
+
     publishButton.addEventListener("click", async () => {
         const content = postInput.value.trim();
         const imageFile = imageInput.files[0];
@@ -295,6 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const post = document.createElement("article");
         post.className = "post-card panel";
+        post.dataset.postId = `post-${Date.now()}`;
         post.dataset.category = "community";
 
         post.innerHTML = `
@@ -363,6 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (button.matches("[data-save]")) {
             const isSaved = button.classList.toggle("is-active");
             button.textContent = isSaved ? "Saved" : "Save";
+            bookmarkPost(button.closest(".post-card"), isSaved);
             showMessage(isSaved ? "Post saved." : "Post removed from saved items.");
         }
 

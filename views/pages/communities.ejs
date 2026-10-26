@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communities | PulseSpace</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/theme.js"></script>
+    <script src="/js/sidebar.js" defer></script>
+    <script src="/js/communities.js" defer></script>
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="/home"><span class="brand-mark">P</span><span>PulseSpace</span></a>
+            <div class="top-actions">
+                <button class="theme-toggle" type="button" data-theme-toggle></button>
+                <label class="search-box"><span class="sr-only">Search PulseSpace</span><input type="search" placeholder="Search PulseSpace"></label>
+                <a class="profile-button" href="/profile"><%= currentUser.name %></a>
+                <a class="profile-button" href="/logout">Sign out</a>
+            </div>
+        </header>
+        <div class="dashboard page-dashboard">
+            <aside class="sidebar panel">
+                <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-label="Collapse sidebar" aria-expanded="true">‹</button>
+                <div class="sidebar-section">
+                    <p class="section-label">YOUR SPACE</p>
+                    <a class="side-link" href="/home">Feed</a>
+                    <a class="side-link" href="/explore">Explore</a>
+                    <a class="side-link selected" href="/communities">Communities</a>
+                    <a class="side-link" href="/messages">Messages</a>
+                    <a class="side-link" href="/bookmarks">Bookmarks</a>
+                    <a class="side-link" href="/profile">My Profile</a>
+                    <a class="side-link" href="/settings">Settings</a>
+                </div>
+            </aside>
+            <main class="content-page">
+                <div class="page-heading"><p class="eyebrow">FIND YOUR PEOPLE</p><h1>Communities</h1><p>Join conversations around the topics you care about.</p></div>
+                <section class="community-grid">
+                    <article class="community-card panel"><span class="community-icon icon-blue">AI</span><h2>AI Revolution</h2><p>Explore practical ideas, tools and conversations about artificial intelligence.</p><span class="community-meta">8.2K members</span><button class="follow-button" type="button" data-join>Join community</button></article>
+                    <article class="community-card panel"><span class="community-icon icon-purple">DE</span><h2>Developer Exchange</h2><p>Build in public, share projects and learn from other developers.</p><span class="community-meta">5.6K members</span><button class="follow-button" type="button" data-join>Join community</button></article>
+                    <article class="community-card panel"><span class="community-icon icon-green">DS</span><h2>Design Studio</h2><p>Discuss thoughtful product design, research and creative practice.</p><span class="community-meta">3.4K members</span><button class="follow-button" type="button" data-join>Join community</button></article>
+                    <article class="community-card panel"><span class="community-icon icon-orange">TW</span><h2>Travel Diaries</h2><p>Share destinations, stories and tips with curious travellers.</p><span class="community-meta">2.1K members</span><button class="follow-button" type="button" data-join>Join community</button></article>
+                </section>
+            </main>
+        </div>
+        <footer class="site-footer">PulseSpace · Connect through ideas.</footer>
+    </div>
+</body>
+</html>
